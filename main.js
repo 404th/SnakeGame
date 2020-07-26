@@ -1,75 +1,82 @@
 ///////////// taking CANVAS ////////////////////////
-let can = document.getElementById("snake")
-let c = can.getContext("2d")
+let can = document.getElementById("snake");
+let c = can.getContext("2d");
 
 ////////////////// creating Snake body ///////////////
 // CONST
-const box = 32
-let x = Math.floor( Math.random()*19 )*box
-let y = Math.floor( Math.random()*19 )*box
+const box = 32;
+let x = Math.floor(Math.random() * 19) * box;
+let y = Math.floor(Math.random() * 19) * box;
 
-let a = Math.floor( Math.random()*19 )*box
-let b = Math.floor( Math.random()*19 )*box
+let a = Math.floor(Math.random() * 19) * box;
+let b = Math.floor(Math.random() * 19) * box;
 
-c.beginPath()
-c.rect( x, y , box, box )
-c.fillStyle = '#18f'
-c.fill()
-c.closePath()
+let snakeArrow = [[x, y]];
 
-///////////////////////////////////////////////////////
-////////////////// creating Food //////////////////////
-
-c.beginPath()
-c.rect( a, b, box, box )
-c.fillStyle = 'red'
-c.fill()
-c.closePath()
-
-////////////////////////////////////////////////////////
-//////////////////// drawing Setka /////////////////////
-
-// vertical line
-let k = 0
-let h = 0
-for( let i=0; i<19; i++ ){
-  c.beginPath()
-  c.moveTo( k, 0 )
-  c.lineTo( k ,608 )
-  c.stroke()
-  k+=32
+function toUp() {
+  if( snakeArrow[0][1] >= box ){
+    snakeArrow[0][1] -= box;
+  }
 }
 
-// horizontal line
-for( let i=0; i<19; i++ ){
-  c.beginPath()
-  c.moveTo( 0, h )
-  c.lineTo( 608, h )
-  c.stroke()
-  h+=32
+function toDown() {
+  if( snakeArrow[0][1] >= box ){
+    snakeArrow[0][1] += box;
+  }
 }
+
+function toRight() {
+  if( snakeArrow[0][0] >= box ){
+    snakeArrow[0][0] += box;
+  }
+}
+
+function toLeft() {
+  if( snakeArrow[0][0] >= box ){
+    snakeArrow[0][0] -= box;
+  }
+}
+
+function creatingSnake() {
+
+  c.clearRect( 0, 0, 608, 608 )
+
+  c.beginPath();
+  c.rect(snakeArrow[0][0], snakeArrow[0][1], box, box);
+  c.fillStyle = "blue";
+  c.fill();
+  c.closePath();
+
+  c.beginPath();
+  c.rect(a, b, box, box);
+  c.fillStyle = "red";
+  c.fill();
+  c.closePath();
+}
+
+setInterval(() => { 
+  creatingSnake()
+}, 100);
 
 ////////////////////////////////////////////////////////
 ///////////// Action of the Snake //////////////////////
-window.addEventListener( 'keydown', event => {
-  
-  switch( event.ket ){
-    
-    case('arrowUp'):
-      toUp()
+
+window.addEventListener("keydown", (event) => {
+  switch (event.key) {
+    case "ArrowUp":
+      toUp();
       break;
 
-    case('arrowDown'):
-      toDown()
+    case "ArrowDown":
+      toDown();
       break;
 
-    case('arrowRight'):
-      toRight()
+    case "ArrowRight":
+      toRight();
       break;
 
-    case('arrowLeft'):
-      toLeft()
+    case "ArrowLeft":
+      toLeft();
       break;
   }
-
-} )
+});
