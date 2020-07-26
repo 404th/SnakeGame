@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake game</title>
+    <style>
+      *,
+      *::after,
+      *::before {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      .container {
+        width: 736px;
+        height: 736px;
+        background-color: #c4c4c4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      canvas {
+        background-color: aliceblue;
+        box-sizing: border-box;
+        border: 1px solid blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <canvas id="snake" width="608" height="608"></canvas>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
